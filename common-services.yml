@@ -30,7 +30,7 @@ services:
         POSTGRES_DB: EventManagerDb
     restart: unless-stopped
     healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres -d EventManagerDb" ]
+      test: [ "CMD-SHELL", "pg_isready -U $DB_USER -d EventManagerDb" ]
       start_period: 1m
       start_interval: 10s
       interval: 1m
