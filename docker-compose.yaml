@@ -1,0 +1,40 @@
+services:
+# Database
+  db-dev:
+    extends:
+      file: common-services.yml
+      service: db-base
+    ports:
+      - 5432:5432
+    profiles:
+      - only-db
+
+  db-prod:
+    extends:
+      file: common-services.yml
+      service: db-base
+    volumes:
+      - ./data/db/:/var/lib/postgresql/
+    profiles:
+      - prod
+
+# Backend
+  backend-cpu-only-prod:
+    extends:
+      file: common-services.yml
+      service: backend-base
+    profiles: [prod]
+    depends_on:
+      db-prod:
+        condition: service_healthy
+
+  # frontend-prod:
+  #   extends:
+  #     file: common-services.yml
+  #     service: frontend-base
+  #   profiles: [ prod] 
+
+
+networks:
+  eventManager:
+    driver: bridge
