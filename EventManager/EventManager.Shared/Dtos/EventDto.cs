@@ -9,11 +9,12 @@ namespace EventManager.Shared.Dtos
         [Required]
         public string Name { get; set; } = string.Empty;
         [MaxLength(100)]
+        [Required]
         public string Location { get; set; } = string.Empty;
-        public string Country { get; set; } = string.Empty;
+        public string? Country { get; set; }
 
-        [Range(0,100000000)]
-        public int Capacity { get; set; } 
+        [Range(0,999999999)]
+        public int? Capacity { get; set; } 
 
         public EventDto(Event eventObject) : base(eventObject)
         {

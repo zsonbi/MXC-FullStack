@@ -18,9 +18,9 @@
         <tr *ngFor="let event of events">
           <td class="fw-bold">{{ event.name }}</td>
           <td>
-            <div>{{ event.location }}, <span class="text-muted">{{ event.country }}</span> </div>
+            <div>{{ event.location }} <span *ngIf="event.country" class="text-muted">, {{ event.country }}</span> </div>
           </td>
-          <td>{{ event.capacity }} ppl</td>
+          <td><span *ngIf="event.capacity">{{ event.capacity }} ppl</span></td>
           <td>
             <a [routerLink]="['/events/edit', event.id]" class="text-decoration-none text-secondary me-3">
               <i class="bi bi-pencil-fill"></i> Edit
