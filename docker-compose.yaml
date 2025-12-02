@@ -28,11 +28,11 @@ services:
       db-prod:
         condition: service_healthy
 
-  # frontend-prod:
-  #   extends:
-  #     file: common-services.yml
-  #     service: frontend-base
-  #   profiles: [ prod] 
+  frontend-prod:
+    extends:
+      file: common-services.yml
+      service: frontend-base
+    profiles: [ prod] 
 
 
 networks:

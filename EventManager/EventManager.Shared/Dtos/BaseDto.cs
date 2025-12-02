@@ -4,7 +4,7 @@ namespace EventManager.Shared.Dtos
 {
     public class BaseDto 
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.Empty;
         public DateTime CreatedAt { get; set; }
         public BaseDto(IDbItem dbItem)
         {

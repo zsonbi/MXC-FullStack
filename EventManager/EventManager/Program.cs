@@ -1,9 +1,11 @@
 
 using EventManager.Database;
 using EventManager.Services;
+using EventManager.Shared.Requests;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using Serilog;
 
 namespace EventManager
 {
@@ -53,7 +55,6 @@ namespace EventManager
 
 
             builder.Services.AddControllers();
-            // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -75,6 +76,24 @@ namespace EventManager
             {
                 var dbContext = scope.ServiceProvider.GetRequiredService<EventManagerDbContext>();
                 await dbContext.Database.MigrateAsync();
+
+                //Seed the db with preset users
+                var userService = scope.ServiceProvider.GetRequiredService<IUserService>();
+                string[] names = new string[4] { "tester", "janos", "vonat", "arlie.donnelly" };
+                string[] emails = new string[4] { "tester@chester.com", "janos@fennajanoshegyen.hu", "vonat@nemvar.mav", "arlie.donnelly@yahoo.com" };
+                string password = "String123";
+                for (int i = 0; i < 4; i++)
+                {
+                    var exists =await userService.GetUserByName(names[i]);
+                    if (!exists.Success)
+                    {
+                        Log.Information("Creating test user {username} {email}", names[i], emails[i]);
+                        await userService.Create(new RegisterRequest() { Username = names[i], Email = emails[i], ConfirmPassword = password, Password = password });
+                    }
+                    else {
+                        Log.Information("Test user {username} already exists skipping it", names[i]);
+                    }
+                }
             }
 
             if (Environment.GetEnvironmentVariable("IS_RUNNING_TESTS") == null || Environment.GetEnvironmentVariable("IS_RUNNING_TESTS") == "false")
@@ -84,7 +103,7 @@ namespace EventManager
 
 
             // Configure the HTTP request pipeline.
-            if (true || app.Environment.IsDevelopment())
+            if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();

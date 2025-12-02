@@ -1,0 +1,41 @@
+<nav class="navbar navbar-light bg-light border-bottom px-4 py-2" *ngIf="authService.isLoggedIn$ | async">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+
+        <a class="navbar-brand p-0" href="#">
+            <img src="logo_transparent_background.png" alt="Mxc Software" height="50">
+        </a>
+
+        <div class="d-flex align-items-center gap-3">
+
+            <div class="text-end lh-1">
+                <div class="fw-bold text-dark fs-6">{{ authService.currentUser$ | async }}</div>
+                <div class="text-muted text-uppercase small cursor-pointer" role="button" (click)="authService.logout()"
+                    style="font-size: 0.75rem; cursor: pointer;">
+                    Logout
+                </div>
+            </div>
+
+            <div class="profile-icon">
+                <i class="bi bi-image text-white"></i>
+            </div>
+
+        </div>
+    </div>
+</nav>
+<style>
+    .bg-light {
+        background-color: #f0f0f0 !important;
+    }
+
+    .profile-icon {
+        width: 42px;
+        height: 42px;
+        background-color: #168acd;
+        border-radius: 50%;
+        border: 3px solid #dcdcdc;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+</style>

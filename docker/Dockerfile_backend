@@ -23,9 +23,9 @@ RUN apt-get update && apt-get install -y gettext-base && rm -rf /var/lib/apt/lis
 
 WORKDIR /src
 COPY ["./EventManager", "./EventManager"]
-COPY ["./EventManager.Shared", "./EventManager.Shared"]
+WORKDIR /src/EventManager
 RUN dotnet restore "./EventManager/EventManager.csproj"
-RUN envsubst < ./ElevatorContentManager/appsettings.deploy.json > ./ElevatorContentManager/appsettings.json
+RUN envsubst < ./EventManager/appsettings.deploy.json > ./EventManager/appsettings.json
 RUN dotnet build "./EventManager/EventManager.csproj" -c "$BUILD_CONFIGURATION" -o /app/build
 
 FROM build AS publish
@@ -40,4 +40,4 @@ USER $APP_UID
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-ENTRYPOINT ["dotnet", "ElevatorContentManager.dll"]
+ENTRYPOINT ["dotnet", "EventManager.dll"]

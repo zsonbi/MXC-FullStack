@@ -39,14 +39,14 @@ services:
     networks:
       - eventManager
 
-  # frontend-base:
-  #   build:
-  #     dockerfile: ./docker/Dockerfile_frontend
-  #     context: .
-  #     args:
-  #     - BACKEND_URL=${BACKEND_URL}
-  #     - FRONTEND_URL=${FRONTEND_URL}
-  #   ports:
-  #     - 5201:80
-  #   restart: unless-stopped
+  frontend-base:
+    build:
+      dockerfile: ./docker/Dockerfile_frontend
+      context: .
+      args:
+      - BACKEND_URL=${BACKEND_URL}
+      - FRONTEND_URL=${FRONTEND_URL}
+    ports:
+      - 1601:80
+    restart: unless-stopped
 

@@ -60,16 +60,24 @@ namespace ElevatorContentManager.Controllers
             return Unauthorized("Invalid username or password");
         }
 
+        [AllowAnonymous]
+        [HttpPost("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return Ok();
+        }
+
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> Get(Guid id,CancellationToken ct = default)
+        public async Task<IActionResult> Get(Guid id, CancellationToken ct = default)
         {
             if (!ModelState.IsValid)
             {
                 return ValidationProblem(ModelState);
             }
 
-            var result = await userService.Get(id,ct);
+            var result = await userService.Get(id, ct);
 
             if (result.Success)
             {
@@ -106,7 +114,7 @@ namespace ElevatorContentManager.Controllers
         public async Task<IActionResult> Delete(Guid id, CancellationToken ct = default)
         {
             var result = await userService.Delete(id, ct);
-      
+
             return result.ReturnAsActionResult();
         }
 
