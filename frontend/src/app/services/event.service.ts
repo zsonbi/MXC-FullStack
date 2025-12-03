@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
 export class EventService {
   private apiUrl = `${environment.apiUrl}/Event`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getEvents(): Observable<EventDto[]> {
     return this.http.get<EventDto[]>(this.apiUrl);
@@ -28,7 +28,7 @@ export class EventService {
     return this.http.put(this.apiUrl, event);
   }
 
-deleteEvent(id: string): Observable<any> {
-  return this.http.delete(`${this.apiUrl}/${id}`, { responseType: 'text' });
-}
+  deleteEvent(id: string): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`, { responseType: 'text' });
+  }
 }

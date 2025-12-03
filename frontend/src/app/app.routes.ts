@@ -6,29 +6,29 @@ import { authGuard, guestGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { 
-    path: 'login', 
-    component: LoginComponent, 
+  {
+    path: 'login',
+    component: LoginComponent,
     //If logged in redirect
-    canActivate: [guestGuard] 
+    canActivate: [guestGuard]
   },
-  { 
-    path: 'events', 
-    component: EventListComponent, 
+  {
+    path: 'events',
+    component: EventListComponent,
     //Only logged in
-    canActivate: [authGuard] 
+    canActivate: [authGuard]
   },
-  { 
-    path: 'events/new', 
-    component: EventFormComponent, 
+  {
+    path: 'events/new',
+    component: EventFormComponent,
     //Only logged in
-    canActivate: [authGuard] 
+    canActivate: [authGuard]
   },
-  { 
-    path: 'events/edit/:id', 
-    component: EventFormComponent, 
+  {
+    path: 'events/edit/:id',
+    component: EventFormComponent,
     //Only logged in
-    canActivate: [authGuard] 
+    canActivate: [authGuard]
   },
   { path: '**', redirectTo: 'login' }
 ];

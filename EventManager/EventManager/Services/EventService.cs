@@ -9,10 +9,33 @@ namespace EventManager.Services
 {
     public interface IEventService : IBaseService<EventDto>
     {
+        /// <summary>
+        /// Creates a new event entry in the database
+        /// </summary>
+        /// <param name="request">The event details</param>
+        /// <param name="ct">Cancellation token for async operations</param>
+        /// <returns>The created event data or an error result</returns>
         public Task<Result<EventDto>> Create(EventDto request, CancellationToken ct = default);
 
+        /// <summary>
+        /// Gets all of the events
+        /// </summary>
+        /// <param name="ct">Cancellation token for async operations</param>
+        /// <returns>A Result with and IEnumerable of EventDtos</returns>
         public Task<Result<IEnumerable<EventDto>>> GetAll(CancellationToken ct = default);
+        /// <summary>
+        /// Deletes an event
+        /// </summary>
+        /// <param name="id">The event id we want to delete</param>
+        /// <param name="ct">Cancellation token for async operations</param>
+        /// <returns>A result object with error or success</returns>
         public Task<Result> Delete(Guid id, CancellationToken ct = default);
+        /// <summary>
+        /// Updates an existing event entry in the database
+        /// </summary>
+        /// <param name="request">The event details</param>
+        /// <param name="ct">Cancellation token for async operations.</param>
+        /// <returns>The updated event data or an error result wrapped in result object</returns>
         public Task<Result<EventDto>> Update(EventDto request, CancellationToken ct = default);
     }
 

@@ -1,6 +1,6 @@
 
 export interface EventDto {
-  id?: string; 
+  id?: string;
   createdAt?: string;
   name: string;
   location?: string;

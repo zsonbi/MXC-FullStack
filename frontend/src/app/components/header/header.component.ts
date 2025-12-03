@@ -10,5 +10,5 @@ import { RouterModule } from '@angular/router';
   templateUrl: './header.template.html'
 })
 export class HeaderComponent {
-  constructor(public authService: AuthService) {}
+  constructor(public authService: AuthService) { }
 }

@@ -23,11 +23,11 @@ export class EventFormComponent implements OnInit {
         private eventService: EventService
     ) {
         this.eventForm = this.fb.group({
-            id: [null], 
+            id: [null],
             name: ['', Validators.required],
-            location: ['', [Validators.required, Validators.maxLength(100)]], 
-            country: ['', ],
-            capacity: [null, [ Validators.min(1)]]
+            location: ['', [Validators.required, Validators.maxLength(100)]],
+            country: ['',],
+            capacity: [null, [Validators.min(1)]]
         });
     }
 

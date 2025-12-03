@@ -18,7 +18,7 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
-      username: ['', Validators.required], 
+      username: ['', Validators.required],
       password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/)]]
     });
   }
@@ -26,7 +26,6 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.invalid) return;
 
-    // A Swagger LoginRequest userName mezőt vár
     const request = {
       userName: this.loginForm.value.username,
       password: this.loginForm.value.password,

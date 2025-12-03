@@ -1,4 +1,4 @@
-@import 'bootstrap/scss/bootstrap';
+@use 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons.css';
 
 body {
@@ -6,7 +6,7 @@ body {
 }
 
 .btn-primary {
-  background-color: #168acd; 
+  background-color: #168acd;
   border-color: #168acd;
 }
 

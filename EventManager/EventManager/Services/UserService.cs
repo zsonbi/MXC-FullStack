@@ -8,10 +8,32 @@ namespace EventManager.Services
 {
     public interface IUserService : IBaseService<UserDto>
     {
+        /// <summary>
+        /// Creates a new user
+        /// </summary>
+        /// <param name="request">The request with the new user data</param>
+        /// <param name="ct">Cancellation token for async operations</param>
+        /// <returns>The created user wrapped in result</returns>
         public Task<Result<UserDto>> Create(RegisterRequest request, CancellationToken ct = default);
-
+        /// <summary>
+        /// Gets all of the users
+        /// </summary>
+        /// <param name="ct">Cancellation token for async operations</param>
+        /// <returns>A result with an IEnumerable of UserDtos</returns>
         public Task<Result<IEnumerable<UserDto>>> GetAll(CancellationToken ct = default);
+        /// <summary>
+        /// Deletes a user based on id
+        /// </summary>
+        /// <param name="id">The id of the user we want to delete</param>
+        /// <param name="ct">Cancellation token for async operations</param>
+        /// <returns>Result of the request</returns>
         public Task<Result> Delete(Guid id, CancellationToken ct = default);
+        /// <summary>
+        /// Gets a user based on it's username
+        /// </summary>
+        /// <param name="username">The username of the user</param>
+        /// <param name="ct">Cancellation token for async operations</param>
+        /// <returns>Result with UserDto as data</returns>
         public Task<Result<UserDto>> GetUserByName(string username, CancellationToken ct = default);
     }
 

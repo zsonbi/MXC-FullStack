@@ -90,6 +90,11 @@ namespace ElevatorContentManager.Controllers
             }
         }
 
+        /// <summary>
+        /// Gets the currently logged in user
+        /// </summary>
+        /// <param name="ct">Cancellation token for async operations</param>
+        /// <returns>UserDto</returns>
         [HttpGet("LoggedIn")]
         public async Task<IActionResult> LoggedIn(CancellationToken ct = default)
         {

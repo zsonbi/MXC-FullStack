@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { LoginRequest, UserProfileDto } from '../models/api-models';
-import { BehaviorSubject, Observable, catchError, finalize, map, of, tap } from 'rxjs'; 
+import { BehaviorSubject, Observable, catchError, finalize, map, of, tap } from 'rxjs';
 import { environment } from '../../environments/environment';
 
 @Injectable({
@@ -19,7 +19,11 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {
   }
-
+  /**
+   * Verifies if the user is currently authenticated by querying the server
+   * If authenticated, it updates the local 'loggedIn' and 'currentUser' subjects
+   * * @returns An Observable that emits true if the user is logged in, false otherwise
+   */
   checkAuthStatus(): Observable<boolean> {
     return this.http.get<UserProfileDto>(`${this.apiUrl}/LoggedIn`).pipe(
       tap((userData) => {
@@ -28,12 +32,12 @@ export class AuthService {
         this.currentUser.next(displayName);
       }),
       //Send back true to the guard
-      map(() => true), 
+      map(() => true),
       catchError(() => {
         this.loggedIn.next(false);
         this.currentUser.next('');
         //In case of error send back false to the guard
-        return of(false); 
+        return of(false);
       })
     );
   }
@@ -59,9 +63,9 @@ export class AuthService {
     ).subscribe();
   }
 
-private clearLocalState() {
-  this.loggedIn.next(false);
-  this.currentUser.next('');
-  this.router.navigate(['/login']);
-}
+  private clearLocalState() {
+    this.loggedIn.next(false);
+    this.currentUser.next('');
+    this.router.navigate(['/login']);
+  }
 }
